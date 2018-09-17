@@ -74,6 +74,7 @@ speedBar.addEventListener('change', (event) => {
 });
 
 document.getElementById('undo_btn').addEventListener('click', event => {
+  // This one was annoying to implement...
   game.stop();
   game.useUndo();
   paint();
@@ -96,3 +97,8 @@ document.getElementById('clear_electrons_btn').addEventListener('click', event =
     }
   });
 });
+
+// TODO: add file input/output functionality
+// option to crop out unnecessary blank space in output
+// management of inputs being differently-sized relative to the board
+//   startY and startX top left corner that's (board h/w minus input h/w) / 2

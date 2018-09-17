@@ -25,6 +25,9 @@ class Wireworld {
     return newBoard;
   }
 
+  // Putting x and y args out of order because it's the ordering of the matrix indices.
+  // More convenient and easy to remember this way. Sorry anal math bruvs
+
   cellExists(y, x) {
     if (this.board[y] && this.board[y][x] !== undefined) return true;
     else return false;
@@ -92,6 +95,7 @@ class Wireworld {
     clearInterval(this.gameInterval);
     this.gameInterval = setInterval(() => {
       this.tick();
+      // Not ideal to have paint() in the Wireworld class, but it works for now
       paint();
     }, speed);
   }
@@ -112,8 +116,9 @@ class Wireworld {
       this.board = this.undo[0];
       this.undo = [];
     } else {
+      // Again, not ideal to have DOM manipulation here
       document.getElementById('undo_btn').disabled = true;
-      // in case of weird errors
+      // in case of weird errors:
       this.undo = [];
     }
   }
