@@ -16,15 +16,21 @@
 
     <div id="control_panel">
       <select id="type_menu">
-        <option value="conductor">Conductor</option>
+        <option value="empty">Empty</option>
         <option value="electron_head">Electron Head</option>
         <option value="electron_tail">Electron Tail</option>
-        <option value="empty">Empty</option>
+        <option value="conductor">Conductor</option>
       </select>
+      <div id="speed_container">
+        <input id="speed" type="range" name="speed" min="1" max="20"/>
+        <!-- speed will be 1000 / Math.pow(2, max/5) -->
+        <p>Speed</p>
+      </div>
       <button id="step_btn" class="button">Step</button>
       <button id="play_btn" class="button">Play</button>
       <button id="clear_electrons_btn" class="button">Clear Electrons</button>
       <button id="clear_all_btn" class="button">Clear All</button>
+      <button id="undo_btn" class="button" disabled>Undo</button>
     </div>
 
     <footer>

@@ -4,6 +4,7 @@ class Wireworld {
     this.width = width;
     this.board = this.makeBoard();
     this.gameInterval = null;
+    this.undo = [];
   }
   // LEGEND:
   // 0: empty, 1: conductor, 2: electron head, 3: electron tail
@@ -19,13 +20,13 @@ class Wireworld {
   makeBoard() {
     let newBoard = [];
     for (let h = 0; h < this.height; h++) {
-      this.newBoard.push(Array(this.width).fill(0));
+      newBoard.push(new Array(this.width).fill(0));
     }
     return newBoard;
   }
 
   cellExists(y, x) {
-    if (this.board[y] && this.board[y][x]) return true;
+    if (this.board[y] && this.board[y][x] !== undefined) return true;
     else return false;
   }
 
@@ -80,9 +81,45 @@ class Wireworld {
   tick() {
     const newBoard = this.makeBoard(this.height, this.width);
     this.forEachCell((y, x) => {
-      newBoard.push(this.getNewStatus(y, x));
+      newBoard[y][x] = this.getNewStatus(y, x);
     });
 
-    return newBoard;
+    this.addUndo();
+    this.board = newBoard;
+  }
+
+  play(speed) {
+    clearInterval(this.gameInterval);
+    this.gameInterval = setInterval(() => {
+      this.tick();
+      paint();
+    }, speed);
+  }
+
+  stop() {
+    clearInterval(this.gameInterval);
+    this.gameInterval = null;
+  }
+
+  copyCells() {
+    return this.board.map(row => row.map(cell => cell));
+  }
+
+  useUndo() {
+    if (this.undo.length > 1) {
+      this.board = this.undo.pop();
+    } else if (this.undo.length === 1) {
+      this.board = this.undo[0];
+      this.undo = [];
+    } else {
+      document.getElementById('undo_btn').disabled = true;
+      // in case of weird errors
+      this.undo = [];
+    }
+  }
+
+  addUndo() {
+    this.undo.push(this.board.map(row => row.map(cell => cell)));
+    document.getElementById('undo_btn').disabled = false;
   }
 }

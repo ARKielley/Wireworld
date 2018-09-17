@@ -1,7 +1,7 @@
 body {
   font-family: Futura, Helvetica, Arial, sans-serif;
   color: white;
-  background-color: #444444;
+  background-color: #505050;
 }
 
 h1 {
@@ -22,25 +22,39 @@ a {
   border-collapse: collapse;
 }
 
-#board td{
+td{
   border: 1px solid #050505;
-  background-color: #555555;
+  background-color: #606060;
   width: 10px;
   height: 10px;
 }
 
-td.alive {
-  background-color: #8CC8DD;
+.empty {
+  background-color: #606060;
+}
+
+.electron_head {
+  background-color: red;
+}
+.electron_tail {
+  color: #505050;
+  background-color: #ffc500;
+}
+.conductor {
+  color: #505050;
+  background-color: white;
 }
 
 #control_panel {
-  margin: 10px 0 50px 0;
+  margin: 0.2em 0 3em 0;
+  display: flex;
+  align-items: center;
 }
 
 .button, #type_menu {
-  /* padding: 0.85em 1em; */
-  padding: 0.6em 1em;
-  /* height: 1.5em; */
+  padding: 0.5em 1em;
+  margin: 0em 0.3em;
+  min-width: 5em;
   border: 1px solid transparent;
   border-radius: 5px;
   font-size: 0.9em;
@@ -49,16 +63,31 @@ td.alive {
   color: white;
 }
 
-#type_menu {
-  margin-right: 13em;
-  height: 2em;
+#speed_container {
+  display: inline-block;
+  margin:0em 1em;
+  margin-top: 0.7em;
+}
+#speed_container p {
+  font-size: 12px;
+  text-align: center;
+  margin-top: -0.2em;
 }
 
-.button:hover, .button:focus {
+#type_menu {
+  /* margin-right: 10em; */
+  height: 1.6em;
+}
+
+.button:hover, .button:focus, #type_menu:hover, #type_menu:active {
   /* background-color: #258dad; */
   background-color: #8CC8DD;
 }
 
 .button:focus {
   outline: dashed 1px #2ba6cb;
+}
+
+.button:disabled {
+  background-color: #aaaaaa;
 }
